@@ -16,7 +16,6 @@ const credentials = {
   ASSISTANT_ID: '0dcecb0a-1aa3-444f-8201-caccdf94f3c6'
 }
 
-
 const authenticator = new IamAuthenticator({
   apikey: credentials.API_KEY
 })
@@ -27,8 +26,6 @@ var assistant = new AssistantV2({
   version: credentials.VERSION,
   disableSslVerification: true
 });
-
-
 
 app.post('/message', function (req, res) {
   if (!req.body.sessionId || !req.body.message) {
@@ -49,9 +46,6 @@ app.post('/message', function (req, res) {
     return res.json(data)
   })
 })
-
-
-
 
 app.get('/session_id', function (req, res) {
   assistant.createSession(
