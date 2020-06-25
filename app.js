@@ -9,7 +9,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 
-const cridentials = {
+const credentials = {
   API_KEY: '9dLH10NOMpracXoD7RrGD_tqGfj0NxUHhPeDA6F72nTC',
   URL:  'https://api.eu-gb.assistant.watson.cloud.ibm.com',
   VERSION: '2019-02-28',
@@ -18,13 +18,13 @@ const cridentials = {
 
 
 const authenticator = new IamAuthenticator({
-  apikey: cridentials.API_KEY
+  apikey: credentials.API_KEY
 })
 
 var assistant = new AssistantV2({
   authenticator: authenticator,
-  url: cridentials.URL,
-  version: cridentials.VERSION,
+  url: credentials.URL,
+  version: credentials.VERSION,
   disableSslVerification: true
 });
 
@@ -35,7 +35,7 @@ app.post('/message', function (req, res) {
     res.status(400).send("bad request")
   }
   var payload = {
-    assistantId: cridentials.ASSISTANT_ID,
+    assistantId: credentials.ASSISTANT_ID,
     sessionId: req.body.sessionId,
     input: {
       message_type : 'text',
@@ -56,7 +56,7 @@ app.post('/message', function (req, res) {
 app.get('/session_id', function (req, res) {
   assistant.createSession(
     {
-      assistantId: cridentials.ASSISTANT_ID,
+      assistantId: credentials.ASSISTANT_ID,
     },
       function(error, response) {
         if (error) {
